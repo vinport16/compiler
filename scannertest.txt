@@ -1,29 +1,26 @@
-PROGRAM Example1chapter3( input, output )
-CONST
-  ValueofPie = 3.1415;
+PROGRAM Samplecount( input, output )
 
 {Calculate nothing correctly}
 VAR
-   Number_Of_Balls : Integer;
-   Customer_Count_   : Interger;
+   Number_Of_Infected : Integer;
+   number_of_cured   : Interger;
 
 BEGIN
-   IF Customer_Count = 0 then BeGin
-	writeln('There are no''Customers');
-	Writeln('Dead in the water');
+VAR 	infection_Rate : real;
+
+   infection_Rate; = 2.37;
+   IF number_of_cured > number_of_infected then BeGin
+	writeln('This is the beginning''Things are better');
+	Writeln('All will be ok');
 	END
 
-SurfaceArea = Radius * Radius * Radius * ValueofPie;
- IF Manager <> 4232 Then
+ Number_new_infected = Infected_Population * infection_Rate;
+ IF Number_new_infected * 10 > Number_Of_Infected Then
 	Begin
-	  AppleProfits = 34.62E11 ;
-	  Microsoft_Profit = 34,313,000;
-	  IBM_Profit = 3313000.0;
-	_ShipFloraProfit = 121.33;
+	writeLn('Infection out of control');
 	End
-	Number_Of_Balls := 0;
-Repeat
-	Number_Of_Balls := Number_Of_Balls - 1;
-UNtil Number_Of_Balls >< 0
+
+If Number_new_infected >< 0
+	writeln('Not over yet');
 
 End

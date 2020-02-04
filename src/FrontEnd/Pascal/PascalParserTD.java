@@ -1,6 +1,10 @@
 package FrontEnd.Pascal;
 
 import FrontEnd.*;
+import Intermediate.SymTabEntry;
+import Intermediate.SymTabFactory;
+import static Intermediate.symtabimpl.SymTabKeyImpl.*;
+
 import Message.*;
 
 public class PascalParserTD extends Parser {
@@ -19,16 +23,15 @@ public class PascalParserTD extends Parser {
             while (! ((token = nextToken()) instanceof EofToken)) {
                 TokenType tokenType = token.getType();
 
-                if(tokenType != PascalTokenType.ERROR){
-                    sendMessage(new Message(MessageType.TOKEN,
-                                            new Object[] {token.getLineNum(),
-                                                          token.getPosition(),
-                                                          tokenType,
-                                                          token.getText(),
-                                                          token.getValue()
-                                            }));
+                if(tokenType == PascalTokenType.IDENTIFIER){
+                    String name = token.getText();
+                    SymTabEntry entry = symTabStack.lookup(name);
+                    if(entry == null){
+                        entry = symTabStack.enterLocal(name);
+                    }
+                    entry.appendLineNumber(token.getLineNumber());
                 }
-                else{
+                else if(tokenType == PascalTokenType.ERROR){
                     errorHandler.flag(token, (PascalErrorCode) token.getValue(), this);
                 }
             }

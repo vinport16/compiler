@@ -1,16 +1,17 @@
 package FrontEnd;
 import Intermediate.ICode;
-import Intermediate.SymTab;
+import Intermediate.SymTabFactory;
+import Intermediate.SymTabStack;
 import Message.*;
 
 public abstract class Parser implements MessageProducer {
     protected Scanner scanner;
     protected ICode iCode;
-    protected static SymTab symTab;
+    protected static SymTabStack symTabStack;
     protected static MessageHandler messageHandler;
 
     static{
-        symTab = null;
+        symTabStack = SymTabFactory.createSymTabStack();
         messageHandler = new MessageHandler();
     }
 
@@ -42,8 +43,8 @@ public abstract class Parser implements MessageProducer {
         messageHandler.sendMessage(message);
     }
 
-    public SymTab getSymTab(){
-        return symTab;
+    public SymTabStack getSymTabStack(){
+        return symTabStack;
     }
 
     public ICode getICode(){
