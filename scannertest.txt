@@ -1,26 +1,12 @@
-PROGRAM Samplecount( input, output )
-
-{Calculate nothing correctly}
-VAR
-   Number_Of_Infected : Integer;
-   number_of_cured   : Interger;
-
+Begin
+   Num_Infected_Wuhan := 15000; num_of_infected := 0;
+   num_of_cured  := 700;   num_fatalities := 500;
 BEGIN
-VAR 	infection_Rate : real;
-
-   infection_Rate; = 2.37;
-   IF number_of_cured > number_of_infected then BeGin
-	writeln('This is the beginning''Things are better');
-	Writeln('All will be ok');
-	END
-
- Number_new_infected = Infected_Population * infection_Rate;
- IF Number_new_infected * 10 > Number_Of_Infected Then
-	Begin
-	writeLn('Infection out of control');
-	End
-
-If Number_new_infected >< 0
-	writeln('Not over yet');
-
+   Growing := num_of_cured > num_of_infected;
+   Future := num_fatalities / Num_Infected_Wuhan * Num_Infected_Wuhan - (num_fatalities+num_of_cured);
+   Better := Num_Infected_Wuhan < ( num_of_cured + num_fatalities );
+   daysleft := Num_Infected_Wuhan < (( num_of_cured + num_fatalities * 10 ) AND
+	(num_of_cured < num_fatalities) Or (num_fatalities > num_of_cured))
+end
 End
+.

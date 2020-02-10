@@ -7,6 +7,7 @@ import Intermediate.*;
 import BackEnd.*;
 import Message.*;
 import util.CrossReferencer;
+import util.ParseTreePrinter;
 
 import static Message.MessageType.*;
 
@@ -56,6 +57,11 @@ public class Pascal
             if(xref){
                 CrossReferencer crossReferencer = new CrossReferencer();
                 crossReferencer.print(symTabStack);
+            }
+
+            if(intermediate){
+                ParseTreePrinter treePrinter = new ParseTreePrinter(System.out);
+                treePrinter.print(iCode);
             }
 
             backend.process(iCode, symTabStack);

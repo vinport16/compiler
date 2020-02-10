@@ -51,4 +51,6 @@ public abstract class Parser implements MessageProducer {
         return iCode;
     }
 
+    public Scanner getScanner() {return scanner;}
+
 }
