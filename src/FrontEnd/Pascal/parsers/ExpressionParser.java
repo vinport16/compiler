@@ -68,7 +68,7 @@ public class ExpressionParser extends StatementParser
      * @return the root of the generated parse subtree.
      * @throws Exception if an error occurred.
      */
-    private ICodeNode parseExpression(Token token)
+    private ICodeNode parseTerm(Token token)
         throws Exception
     {
         // Parse a simple expression and make the root of its tree
@@ -102,7 +102,7 @@ public class ExpressionParser extends StatementParser
 
     // Set of additive operators.
     private static final EnumSet<PascalTokenType> ADD_OPS =
-        EnumSet.of(PLUS, MINUS, PascalTokenType.OR);
+        EnumSet.of(PLUS, MINUS, PascalTokenType.AND);
 
     // Map additive operator tokens to node types.
     private static final HashMap<PascalTokenType, ICodeNodeTypeImpl>
@@ -110,7 +110,7 @@ public class ExpressionParser extends StatementParser
     static {
         ADD_OPS_OPS_MAP.put(PLUS, ADD);
         ADD_OPS_OPS_MAP.put(MINUS, SUBTRACT);
-        ADD_OPS_OPS_MAP.put(PascalTokenType.OR, ICodeNodeTypeImpl.OR);
+        ADD_OPS_OPS_MAP.put(PascalTokenType.AND, ICodeNodeTypeImpl.AND);
     };
 
     /**
@@ -119,7 +119,7 @@ public class ExpressionParser extends StatementParser
      * @return the root of the generated parse subtree.
      * @throws Exception if an error occurred.
      */
-    private ICodeNode parseSimpleExpression(Token token)
+    private ICodeNode parseFactor(Token token)
         throws Exception
     {
         TokenType signType = null;  // type of leading sign (if any)
@@ -174,7 +174,7 @@ public class ExpressionParser extends StatementParser
 
     // Set of multiplicative operators.
     private static final EnumSet<PascalTokenType> MULT_OPS =
-        EnumSet.of(STAR, SLASH, DIV, PascalTokenType.MOD, PascalTokenType.AND);
+        EnumSet.of(STAR, SLASH, DIV, PascalTokenType.MOD, PascalTokenType.OR);
 
     // Map multiplicative operator tokens to node types.
     private static final HashMap<PascalTokenType, ICodeNodeType>
@@ -184,7 +184,7 @@ public class ExpressionParser extends StatementParser
         MULT_OPS_OPS_MAP.put(SLASH, FLOAT_DIVIDE);
         MULT_OPS_OPS_MAP.put(DIV, INTEGER_DIVIDE);
         MULT_OPS_OPS_MAP.put(PascalTokenType.MOD, ICodeNodeTypeImpl.MOD);
-        MULT_OPS_OPS_MAP.put(PascalTokenType.AND, ICodeNodeTypeImpl.AND);
+        MULT_OPS_OPS_MAP.put(PascalTokenType.OR, ICodeNodeTypeImpl.OR);
     };
 
     /**
@@ -193,7 +193,7 @@ public class ExpressionParser extends StatementParser
      * @return the root of the generated parse subtree.
      * @throws Exception if an error occurred.
      */
-    private ICodeNode parseTerm(Token token)
+    private ICodeNode parseExpression(Token token)
         throws Exception
     {
         // Parse a factor and make its node the root node.
@@ -233,7 +233,7 @@ public class ExpressionParser extends StatementParser
      * @return the root of the generated parse subtree.
      * @throws Exception if an error occurred.
      */
-    private ICodeNode parseFactor(Token token)
+    private ICodeNode parseSimpleExpression(Token token)
         throws Exception
     {
         TokenType tokenType = token.getType();
