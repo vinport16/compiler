@@ -244,7 +244,7 @@ public class ExpressionParser extends StatementParser
             case IDENTIFIER: {
                 // Look up the identifier in the symbol table stack.
                 // Flag the identifier as undefined if it's not found.
-                String name = token.getText().toLowerCase();
+                String name = token.getText();
                 SymTabEntry id = symTabStack.lookup(name);
                 if (id == null) {
                     errorHandler.flag(token, IDENTIFIER_UNDEFINED, this);
