@@ -3,6 +3,8 @@ package FrontEnd.Pascal.parsers;
 import FrontEnd.*;
 import FrontEnd.Pascal.*;
 import Intermediate.*;
+import java.util.EnumSet;
+
 
 import static FrontEnd.Pascal.PascalTokenType.*;
 import static FrontEnd.Pascal.PascalErrorCode.*;
@@ -28,6 +30,14 @@ public class AssignmentStatementParser extends StatementParser
         super(parent);
     }
 
+    // Synchronization set for the := token.
+    private static final EnumSet<PascalTokenType> COLON_EQUALS_SET =
+            ExpressionParser.EXPR_START_SET.clone();
+    static {
+        COLON_EQUALS_SET.add(COLON_EQUALS);
+        COLON_EQUALS_SET.addAll(StatementParser.STMT_FOLLOW_SET);
+    }
+
     /**
      * Parse an assignment statement.
      * @param token the initial token.
@@ -35,14 +45,14 @@ public class AssignmentStatementParser extends StatementParser
      * @throws Exception if an error occurred.
      */
     public ICodeNode parse(Token token)
-        throws Exception
+            throws Exception
     {
         // Create the ASSIGN node.
         ICodeNode assignNode = ICodeFactory.createICodeNode(ASSIGN);
 
         // Look up the target identifer in the symbol table stack.
         // Enter the identifier into the table if it's not found.
-        String targetName = token.getText();
+        String targetName = token.getText().toLowerCase();
         SymTabEntry targetId = symTabStack.lookup(targetName);
         if (targetId == null) {
             targetId = symTabStack.enterLocal(targetName);
@@ -58,7 +68,8 @@ public class AssignmentStatementParser extends StatementParser
         // The ASSIGN node adopts the variable node as its first child.
         assignNode.addChild(variableNode);
 
-        // Look for the := token.
+        // Synchronize on the := token.
+        token = synchronize(COLON_EQUALS_SET);
         if (token.getType() == COLON_EQUALS) {
             token = nextToken();  // consume the :=
         }

@@ -4,6 +4,8 @@ import FrontEnd.*;
 import FrontEnd.Pascal.*;
 import Intermediate.*;
 
+import java.util.EnumSet;
+
 import static FrontEnd.Pascal.PascalTokenType.*;
 import static FrontEnd.Pascal.PascalErrorCode.*;
 import static Intermediate.icodeimpl.ICodeNodeTypeImpl.*;
@@ -28,6 +30,15 @@ public class StatementParser extends PascalParserTD
         super(parent);
     }
 
+    // Synchronization set for starting a statement.
+    protected static final EnumSet<PascalTokenType> STMT_START_SET =
+            EnumSet.of(BEGIN, CASE, FOR, PascalTokenType.IF, REPEAT, WHILE,
+                    IDENTIFIER, SEMICOLON);
+
+    // Synchronization set for following a statement.
+    protected static final EnumSet<PascalTokenType> STMT_FOLLOW_SET =
+            EnumSet.of(SEMICOLON, END, ELSE, UNTIL, DOT);
+
     /**
      * Parse a statement.
      * To be overridden by the specialized statement parser subclasses.
@@ -36,7 +47,7 @@ public class StatementParser extends PascalParserTD
      * @throws Exception if an error occurred.
      */
     public ICodeNode parse(Token token)
-        throws Exception
+            throws Exception
     {
         ICodeNode statementNode = null;
 
@@ -44,7 +55,7 @@ public class StatementParser extends PascalParserTD
 
             case BEGIN: {
                 CompoundStatementParser compoundParser =
-                    new CompoundStatementParser(this);
+                        new CompoundStatementParser(this);
                 statementNode = compoundParser.parse(token);
                 break;
             }
@@ -52,8 +63,46 @@ public class StatementParser extends PascalParserTD
             // An assignment statement begins with a variable's identifier.
             case IDENTIFIER: {
                 AssignmentStatementParser assignmentParser =
-                    new AssignmentStatementParser(this);
+                        new AssignmentStatementParser(this);
                 statementNode = assignmentParser.parse(token);
+                break;
+            }
+
+            case REPEAT: {
+                RepeatStatementParser repeatParser =
+                        new RepeatStatementParser(this);
+                statementNode = repeatParser.parse(token);
+                break;
+            }
+
+            case WHILE: {
+                WhileStatementParser whileParser =
+                        new WhileStatementParser(this);
+                statementNode = whileParser.parse(token);
+                break;
+            }
+
+            case FOR: {
+                ForStatementParser forParser = new ForStatementParser(this);
+                statementNode = forParser.parse(token);
+                break;
+            }
+
+            case LOOP: {
+                LoopStatementParser loopParser = new LoopStatementParser(this);
+                statementNode = loopParser.parse(token);
+                break;
+            }
+
+            case IF: {
+                IfStatementParser ifParser = new IfStatementParser(this);
+                statementNode = ifParser.parse(token);
+                break;
+            }
+
+            case CASE: {
+                CaseStatementParser caseParser = new CaseStatementParser(this);
+                statementNode = caseParser.parse(token);
                 break;
             }
 

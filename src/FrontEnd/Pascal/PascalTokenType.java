@@ -7,13 +7,13 @@ import java.util.HashSet;
 public enum PascalTokenType implements TokenType {
     // Reserved words.
     AND, ARRAY, BEGIN, CASE, DIV, DO, ELSE, END,
-    FILE, FOR, FUNCTION, IF, IN, MOD, NIL, NOT,
+    FILE, FOR, FUNCTION, IF, IN, LOOP, MOD, NIL, NOT,
     OF, OR, PACKED, PROCEDURE, PROGRAM, REPEAT, SET,
     THEN, TO, UNTIL, VAR, WHILE, WITH,
 
     // Special symbols.
     PLUS("+"), MINUS("-"), STAR("*"), SLASH("/"), COLON_EQUALS(":="),
-    DOT("."), COMMA(","), SEMICOLON(";"), COLON(":"), QUOTE("'"),
+    DOT("."), COMMA(","), SEMICOLON(";"), COLON(":"), BAR("|"), QUOTE("'"),
     EQUALS("="), NOT_EQUALS("><"), LESS_THAN("<"), LESS_EQUALS("<="),
     GREATER_EQUALS(">="), GREATER_THAN(">"), LEFT_PAREN("("), RIGHT_PAREN(")"),
     LEFT_BRACKET("["), RIGHT_BRACKET("]"), LEFT_BRACE("{"), RIGHT_BRACE("}"),
