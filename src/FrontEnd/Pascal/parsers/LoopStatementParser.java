@@ -110,7 +110,8 @@ public class LoopStatementParser extends StatementParser
         // Set the current line number attribute.
         setLineNumber(test, targetToken);
 
-        loopNode.addChild(test);
+        testNode.addChild(test);
+        loopNode.addChild(testNode);
 
         // Synchronize at the 2nd BAR
         token = synchronize(BAR_SET);
