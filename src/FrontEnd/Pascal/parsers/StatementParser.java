@@ -82,6 +82,13 @@ public class StatementParser extends PascalParserTD
                 break;
             }
 
+            case WHEN: {
+                WhenStatementParser whenParser =
+                        new WhenStatementParser(this);
+                statementNode = whenParser.parse(token);
+                break;
+            }
+
             case FOR: {
                 ForStatementParser forParser = new ForStatementParser(this);
                 statementNode = forParser.parse(token);

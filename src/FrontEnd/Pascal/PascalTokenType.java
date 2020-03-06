@@ -6,10 +6,10 @@ import java.util.HashSet;
 
 public enum PascalTokenType implements TokenType {
     // Reserved words.
-    AND, ARRAY, BEGIN, CASE, DIV, DO, ELSE, END,
-    FILE, FOR, FUNCTION, IF, IN, LOOP, MOD, NIL, NOT,
+    AND, ARRAY, BEGIN, CASE, DIV, DO, ELSE, END, EQUAL0,
+    FILE, FOR, FUNCTION, IF, GREATERTHAN0, IN, LESSTHAN0, LOOP, MOD, NIL, NOT,
     OF, OR, PACKED, PROCEDURE, PROGRAM, REPEAT, SET,
-    THEN, TO, UNTIL, VAR, WHILE, WITH,
+    THEN, TO, UNTIL, VAR, WHILE, WHEN, WITH,
 
     // Special symbols.
     PLUS("+"), MINUS("-"), STAR("*"), SLASH("/"), COLON_EQUALS(":="),

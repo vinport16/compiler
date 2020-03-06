@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import FrontEnd.*;
 import FrontEnd.Pascal.*;
 import Intermediate.*;
+import Intermediate.icodeimpl.ICodeNodeTypeImpl;
 
 import static FrontEnd.Pascal.PascalTokenType.*;
 import static FrontEnd.Pascal.PascalErrorCode.*;
@@ -62,7 +63,7 @@ public class ForStatementParser extends StatementParser
 
         // Create the loop COMPOUND, LOOP, and TEST nodes.
         ICodeNode compoundNode = ICodeFactory.createICodeNode(COMPOUND);
-        ICodeNode loopNode = ICodeFactory.createICodeNode(LOOP);
+        ICodeNode loopNode = ICodeFactory.createICodeNode(ICodeNodeTypeImpl.LOOP);
         ICodeNode testNode = ICodeFactory.createICodeNode(TEST);
 
         // Parse the embedded initial assignment.
