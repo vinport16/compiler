@@ -10,19 +10,12 @@ import static Intermediate.icodeimpl.ICodeKeyImpl.*;
 import static BackEnd.Interpreter.RuntimeErrorCode.*;
 import static Message.MessageType.SOURCE_LINE;
 
-/**
- * <h1>StatementExecutor</h1>
- *
- * <p>Execute a statement.</p>
- *
- * <p>Copyright (c) 2009 by Ronald Mak</p>
- * <p>For instructional purposes only.  No warranties.</p>
- */
+
 public class StatementExecutor extends Executor
 {
     /**
      * Constructor.
-     * @param the parent executor.
+     * @param parent the parent executor.
      */
     public StatementExecutor(Executor parent)
     {
@@ -51,8 +44,23 @@ public class StatementExecutor extends Executor
 
             case ASSIGN: {
                 AssignmentExecutor assignmentExecutor =
-                    new AssignmentExecutor(this);
+                        new AssignmentExecutor(this);
                 return assignmentExecutor.execute(node);
+            }
+
+            case LOOP: {
+                LoopExecutor loopExecutor = new LoopExecutor(this);
+                return loopExecutor.execute(node);
+            }
+
+            case IF: {
+                IfExecutor ifExecutor = new IfExecutor(this);
+                return ifExecutor.execute(node);
+            }
+
+            case SELECT: {
+                SelectExecutor selectExecutor = new SelectExecutor(this);
+                return selectExecutor.execute(node);
             }
 
             case NO_OP: return null;
