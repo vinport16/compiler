@@ -82,6 +82,13 @@ public class StatementParser extends PascalParserTD
                 break;
             }
 
+            case WHILENOTE: {
+                WhileNotEStatementParser whileNotEParser =
+                        new WhileNotEStatementParser(this);
+                statementNode = whileNotEParser.parse(token);
+                break;
+            }
+
             case WHEN: {
                 WhenStatementParser whenParser =
                         new WhenStatementParser(this);

@@ -1,23 +1,11 @@
-Begin
-
-Infected := 100;
-Recovered := 5;
-Dead := 5;
-
-Day := 0;
-
-Loop ( Day := 1  | (Infected - Recovered) > (Dead * Dead) | Day := Day + 1 ) do
-Begin 
-	Infected := Infected * 1.10;
-	When ( Dead - Recovered ) 
-	Lessthan0 Begin
-		Recovered := Recovered + (Infected * 0.120);
-		Dead := Dead + (Infected * 0.1);
-		End;
-	equal0 Recovered := Recovered + (Infected * 0.20);
-	Greaterthan0
-	Begin
-		Dead := Dead * Dead; 
-	End;
-eND
+begin
+A := 2;
+B := 2;
+count := 0;
+WhileNotE ( A * B )
+   begin
+      count := count + 1;
+      A := A + 2;
+      B := B + (B * count );
+   end
 end.
